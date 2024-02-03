@@ -11,5 +11,12 @@ class Player(Sprite): #Класс игрока
         self.velosity_y=0
         self.on_platform=False
     def update(self):
+        """Обновляем данные игрока"""
         self.velocity_y = min(self.velocity_y+self.gravity, 15)
-        self,recty.y += self.velocity_y
+        self.rect.y += self.velocity_y
+        #Логика перса
+        if self.is_walking_right!= self.is_walking_left:
+            if self.is_walking_right:
+                self.rect.x += self.speed
+            else:
+                self.rect.x -= self.speed
