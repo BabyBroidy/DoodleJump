@@ -6,12 +6,17 @@ class Player(Sprite): #Класс игрока
         self.gravity=gravity
         self.speed=speed
         self.jump_power=jump_power
+        self.original_image = image.copy()
         self.is_walking_right=False
         self.is_walking_left=False
         self.velosity_y=0
         self.on_platform=False
+
     def update(self):
         """Обновляем данные игрока"""
+        if self.on_platform:
+            self.velocity_y= - self.jump_power
+
         self.velocity_y = min(self.velocity_y+self.gravity, 15)
         self.rect.y += self.velocity_y
         #Логика перса
@@ -20,3 +25,13 @@ class Player(Sprite): #Класс игрока
                 self.rect.x += self.speed
             else:
                 self.rect.x -= self.speed
+
+        self.on_platform=False
+        
+    def reset(self,center): #Возврат к началу
+        super().__init__(center, self.original_image)
+        self.velocity_y=0
+        self.is_walking_right= False
+        self.is_walking_left = False
+        self.on_platform= False
+

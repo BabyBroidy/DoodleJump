@@ -26,7 +26,7 @@ class PlatformGenerator():
 
     def create_platform(self, center_y):
         "Создаёт платформу"
-        number=randint(1,3)
+        number=randint(0,3)
         image=self.platform_images[number]
         min_x= image.get_width()//2
         max=display_size[0]-image.get_width()//2
