@@ -16,6 +16,7 @@ class Game():
     
     def restart(self):
         """Перезапуск игры"""
+        self.player.reset((240,600))
         self.losed=False
         self.offset_y=0
         self.platforms=list()
@@ -60,7 +61,6 @@ class Game():
         surface.blit(self.background, (0,0))
         for platform in self.platforms:
             platform.render(surface)
-        self.player.render(surface)
         #Рендер экрана
         self.player.render(surface)
 

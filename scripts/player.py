@@ -1,12 +1,12 @@
 from scripts.sprite import Sprite
-
+import pygame
 class Player(Sprite): #Класс игрока
     def __init__(self, center, image, jump_power, gravity, speed):
         super().__init__(center, image)
+        self.original_image = image.copy()
         self.gravity=gravity
         self.speed=speed
         self.jump_power=jump_power
-        self.original_image = image.copy()
         self.is_walking_right=False
         self.is_walking_left=False
         self.velosity_y=0
@@ -23,9 +23,10 @@ class Player(Sprite): #Класс игрока
         if self.is_walking_right!= self.is_walking_left:
             if self.is_walking_right:
                 self.rect.x += self.speed
+                self.image= self.original_image.copy()
             else:
                 self.rect.x -= self.speed
-
+                self.image = pygame.transform.flip(self.original_image, True, False)
         self.on_platform=False
         
     def reset(self,center): #Возврат к началу
